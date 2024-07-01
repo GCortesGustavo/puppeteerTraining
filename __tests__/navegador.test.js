@@ -5,7 +5,7 @@ describe("Primer test en mi vida", () => {
         const browser = await puppeteer.launch({
             // headless: true hace que no se abra el navegador y que las pruebas sean
             // más rápidas. headless: false siempre abre el navegador.
-            headless: false,
+            headless: true,
             // slowMo nos permite ver las acciones en cámara lenta.
             slowMo: 0,
             // devtools por defecto es false. Si es true, nos abre las herramientas de desarrollo en el navegador.
