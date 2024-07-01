@@ -4,8 +4,8 @@ describe("Tipos de espera", ()=> {
     
     it("Mostrar todos los tipos de espera", async()=> {
         const browser = await puppeteer.launch({
-            headless: false,
-            defaultViewport: null
+            headless: true,
+            defaultViewport: null,
         })
 
         const page = await browser.newPage()
@@ -24,9 +24,21 @@ describe("Tipos de espera", ()=> {
 
         await page.goto("https://demoqa.com/modal-dialogs", {waitUntil: "networkidle2"})
 
-        const button = await page.waitForSelector("#showSmallModal", { visible: true})
-        await button.click({delay: 200})
+        await page.waitForSelector("#showSmallModal", { visible: true})
+        await page.click("#showSmallModal", {delay: 200})
 
+        //Espera por funcion. Esto valida que el texto que esta dentro sea el deseado
+        await page.waitForFunction(() => document.querySelector("#example-modal-sizes-title-sm").innerText == "Small Modal")
+
+        //Ejemplo para observar el viewport
+        // const observaResize = page.waitForFunction("window.innerWidth < 100")
+        // await page.setViewport({width: 50, height:50})
+
+        // await observaResize
+
+        await page.click("#closeSmallModal")
+        await page.waitForFunction(() => !!document.querySelector('#example-modal-sizes-title-sm'))      
+        
         await browser.close()
     }, 350000)
 })
