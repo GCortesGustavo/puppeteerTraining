@@ -2,6 +2,7 @@ const puppeteer = require("puppeteer")
 
 describe("Extrayendo informacion", () => {
 
+    
     // it("Extrayendo el título de la página y la url", async() => {
     //     const browser = await puppeteer.launch({
     //         headless: false,
@@ -20,14 +21,24 @@ describe("Extrayendo informacion", () => {
     //     await browser.close()
     // }, 35000)
 
-    it("Extraer la informacion de un elemento", async() => {
-        const browser = await puppeteer.launch({
+    let browser
+    let page
+    beforeAll(async() => {
+        browser = await puppeteer.launch({
             headless: true,
             defaultViewport: null
         })
 
-        const page = await browser.newPage()
+        page = await browser.newPage()
         await page.goto("http://platzi.com", {waitUntil: "networkidle0"})
+
+    }, 20000)
+
+    afterAll(async() => {
+        await browser.close()
+    }, 20000)
+
+    it("Extraer la informacion de un elemento", async() => {
         await page.waitForSelector("body > main > header > div > nav > ul > li:nth-child(4) > a")
 
         //Corre el método document.querySelector
@@ -49,23 +60,14 @@ describe("Extrayendo informacion", () => {
 
         // console.log("Nombre Boton" ,texto2);
 
-        await browser.close()
-    }, 35000)
+
+    }, 350000)
 
 
     it("Contar los elementos de una página", async() => {
-        const browser = await puppeteer.launch({
-            headless: false,
-            defaultViewport: null
-        })
-
-        const page = await browser.newPage()
-        await page.goto("http://platzi.com", {waitUntil: "networkidle0"})
-
         const images = await page.$$eval("h2", (imagenes) => imagenes.length)
     
         console.log("imagenes", images);
 
-        await browser.close()
     }, 350000)
 })
