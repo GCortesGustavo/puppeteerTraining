@@ -1,7 +1,9 @@
 const puppeteer = require("puppeteer")
 
 describe("Tipos de espera", ()=> {
-    
+    //Se configura el tiempo de la prueba propio de Jest
+    jest.setTimeout(350000)
+
     it("Mostrar todos los tipos de espera", async()=> {
         const browser = await puppeteer.launch({
             headless: true,
@@ -9,6 +11,9 @@ describe("Tipos de espera", ()=> {
         })
 
         const page = await browser.newPage()
+        //Propio de puppeteer
+        page.setDefaultTimeout(35000)
+        page.setDefaultNavigationTimeout(35000)
         await page.goto("http:/platzi.com", {waitUntil: "networkidle2"})
 
         //Esto reemplaza a waitForTimeout(5000)
@@ -37,8 +42,10 @@ describe("Tipos de espera", ()=> {
         // await observaResize
 
         await page.click("#closeSmallModal")
-        await page.waitForFunction(() => !!document.querySelector('#example-modal-sizes-title-sm'))      
+        await page.waitForFunction(() => !!document.querySelector('#example-modal-sizes-title-sm'), {
+            timeout: 30000
+        })      
         
         await browser.close()
-    }, 350000)
+    })
 })
