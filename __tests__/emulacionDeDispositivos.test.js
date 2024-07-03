@@ -10,7 +10,12 @@ describe("Emulando en dispositivos", ()=> {
             defaultViewport: null
         })
 
-        page = await browser.newPage()
+        //page = await browser.newPage()
+
+        //para emular en modo incógnito
+        const context = await browser.createBrowserContext()
+        page = await context.newPage()
+
         await page.goto("http://platzi.com", {waitUntil: "networkidle0"})
     }, 15000)
 
