@@ -1,5 +1,7 @@
 const puppeter = require("puppeteer")
 
+const { click, type, doubleClick} = require("../lib/helpers")
+
 describe("Interactuando con elementos", () => {
     
     it("Interactuar con elementos", async () => {
@@ -20,17 +22,17 @@ describe("Interactuando con elementos", () => {
         await page.click("#authentication > span", { button: "right", delay: 500})
 
         //Doble click
-        await page.click("#authentication > button", {clickCount:2, delay:800})
+        await doubleClick(page, "#authentication > button")
         
-
         
         await page.goto("http:/devexpress.github.io/testcafe/example/")
 
-        await page.type("#developer-name", "Gustavo", {delay: 200})
-        await page.click("#remote-testing", {delay: 200})
-        await page.click("#tried-test-cafe", {delay: 200})
-        await page.type("#comments", "Esto es una prueba", {delay:300})
-        await page.click("#submit-button", {delay:300})
+        await type(page,"#developer-name", "Gustavo", {delay: 200})
+        
+        await click(page, "#remote-testing", {delay: 200})
+        await click(page,"#tried-test-cafe", {delay: 200})
+        await type(page,"#comments", "Esto es una prueba", {delay:300})
+        await click(page,"#submit-button", {delay:300})
         
         await new Promise(r => setTimeout(r, 3000));
 
