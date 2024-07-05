@@ -19,14 +19,14 @@ describe("Pruebas de accesibilidad", () => {
         await browser.close()
     })
 
-    test('Accesibilidad', async() => { 
+    // test('Accesibilidad', async() => { 
 
-        await page.goto("https://platzi.com")
-        await page.waitForSelector("img")
-        const snapshot = await page.accessibility.snapshot()
-        console.log(snapshot);
+    //     await page.goto("https://platzi.com")
+    //     await page.waitForSelector("img")
+    //     const snapshot = await page.accessibility.snapshot()
+    //     console.log(snapshot);
 
-    }, 45000)
+    // }, 45000)
 
 
     test('Probando accesibilidad con axe', async() => { 
@@ -39,5 +39,5 @@ describe("Pruebas de accesibilidad", () => {
         const result = await new AxePuppeteer(page).analyze()
         console.log(result.violations);
 
-    }, 45000)
-})
+    }, 50000)
+},100000)

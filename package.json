@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --forceExit --detectOpenHandles",
     "test-emulacion-de-dispositivos": "jest --forceExit --detectOpenHandles __test__/emulacionDeDispositivos.test.js",
-    "visual-test": "jest -u --forceExit --detectOpenHandles __tests__/visual.test.js"
+    "visual-test": "jest -u --forceExit --detectOpenHandles __tests__/visual.test.js",
+    "firefox": "jest -u --forceExit --detectOpenHandles __tests__/firefox.test.js"
   },
   "keywords": [],
   "author": "",
